@@ -7,7 +7,7 @@ const googleIt = require('google-it');
 const fs = require('fs');
 const axios = require('axios');
 
-const token = '6088593943:AAGBi2SIhvhqvSH_FQwc6Oy6-BKOha99Ehk';
+const token = 'Bot_token_here';
 const bot = new TelegramBot(token, { polling: true });
 const defaultLimit = 10000; // Default limit if no limit provided
 const usersFile = 'allowed_users.txt'; // File to store allowed user IDs
@@ -151,7 +151,6 @@ bot.onText(/\/search (.+)(?: (\d+))?/, (msg, match) => {
         fs.writeFileSync('search_results.txt', data);
         bot.sendDocument(chatId, './search_results.txt').then(() => {
           bot.deleteMessage(chatId, loadingMsg.message_id);
-          bot.sendMessage(masterId, `Search results for "${query}" have been sent to ${chatId}`);
         });
       }).catch(e => {
         console.error(e);
